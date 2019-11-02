@@ -3,7 +3,9 @@ import json
 import os
 import tldextract
 import pprint
+
 filename = 'easy_list.txt'
+
 pp = pprint.PrettyPrinter(indent=2)
 
 
