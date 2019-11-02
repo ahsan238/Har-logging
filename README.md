@@ -31,9 +31,11 @@ def run_automation(url_list):
 
 As can be observed from the code above, there are five calls for click function. The arguments in each of these calls are the pixel values. The pixel values have to be exact. Below is a picture that you can use as a reference to understand where these points (pixels) are located. The arrows direct to the points for which we need exact pixel values.  
 
+### Main debugging interface:
 ![Main debugging interface](img/img1.png)
 
 
+### Local folders where har file is to be saved
 ![Local folders where file is to be saved](img/img2.png)
 
 
