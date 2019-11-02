@@ -1,4 +1,4 @@
-# Useful Script for my Sproj on mobile tracking
+# Autologging scripts
 
 ## browser_auto.py
 
