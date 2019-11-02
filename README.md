@@ -50,3 +50,11 @@ print (py.position())
 ##### Using this way, extract all pixel values for the points mentioned above (5 of them) and replace the values in the original file.
 
 
+## Usage
+#### go to the terminal and type
+```
+python browser_auto.py 10
+```
+#### the value 10 indicates the number of seconds you want to wait for the page to load before you save the har file
+
+
