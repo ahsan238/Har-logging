@@ -109,7 +109,7 @@ rules = AdblockRules(combined_rules)
 
 
 dir = "./../tracking_data/nexus 5 WIFI/json/"
-total_trackers = find_tracker_urls(dir) #stores complete information about all detected trackers
+total_trackers = find_tracker_urls(dir) #stores urls of all detected trackers
 tracker_numbers = get_numbers(total_trackers) #stores the number of trackers detected per website
 # print pp.pprint(num_dict)
 if 'WIFI' in dir:
@@ -118,8 +118,6 @@ if 'WIFI' in dir:
 else:
   output_total_file_name = "total_trackers_LTE.json"
   output_number_file_name = "number_trackers_LTE.json"
-  # 'WIFI' in dir? "number_trackers_WIFI.json": "total_trackers_LTE.json"
-  # "total_trackers_WIFI.json": "total_trackers_LTE.json"
 
 
 with open(output_total_file_name, 'w') as fp:
@@ -128,8 +126,5 @@ with open(output_total_file_name, 'w') as fp:
 with open(output_number_file_name, 'w') as fp:
   json.dump(tracker_numbers, fp,indent = 4)
   fp.close()
-# f = open('dict.txt','w')
-# f.write(str(wifi_dict))
-# f.close()
 
 
