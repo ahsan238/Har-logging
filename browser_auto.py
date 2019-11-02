@@ -42,19 +42,13 @@ def run_automation(url_list):
   for url in url_list:
     # py.click(706,107) #clear the log
     py.click(569,76) #click url bar
-    py.hotkey("ctrlleft","a","backspace")
-    # py.sleep(2)
-    # for i in range(10):
-      # py.press("backspace")
-    #   time.sleep(1)
-    # py.press("backspace")
+    py.hotkey("ctrlleft","a","backspace") #clear the tab
     py.typewrite(str(url)) #enter url
-    # break
     py.press("enter") #press enter
     time.sleep(wait_time) #wait for the website to load
-    if scorlling == True:
+    if scorlling == True: #perform scrolling if enabled
       py.moveTo(384,312)
-      py.scroll(-30)
+      py.scroll(-30) #takes as argument number of pixels to scroll
       time.sleep(4)
     py.click(1126,101) # export the har file
     time.sleep(1)
@@ -63,13 +57,10 @@ def run_automation(url_list):
     py.click(1318,56) #press save button
     time.sleep(4)
     py.click(706,107) #clear the logs
-    # py.typewrite("")
-  # pt.click(1126, 101)
 
 
-url_list = getwebList(filename)
-# print url_list
-url_list = cross_check_list(url_list)
-# print (url_list)
+url_list = getwebList(filename) #store the list of websites into a list
+
+url_list = cross_check_list(url_list) #if a website has already been logged and the har file is in the folder, it will remove that website from the list
 
 run_automation(url_list)
