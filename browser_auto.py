@@ -39,7 +39,7 @@ def cross_check_list(url_list):
 
 
 def run_automation(url_list):
-  for url in url_list:
+      for url in url_list:
     # py.click(706,107) #clear the log
     py.click(569,76) #click url bar
     py.hotkey("ctrlleft","a","backspace") #clear the tab
