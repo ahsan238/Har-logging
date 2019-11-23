@@ -10,7 +10,7 @@ import pyautogui as py
 wait_time = int(sys.argv[1])
 scorlling = True
 
-filename = 'list_Pk.txt'
+filename = './../USA.txt'
 
 def getwebList(filename):
   weblist = []
