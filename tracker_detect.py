@@ -4,7 +4,7 @@ import os
 import tldextract
 import pprint
 
-filename = 'easy_list.txt'
+filename = "easyprivacy.txt"
 
 pp = pprint.PrettyPrinter(indent=2)
 
@@ -56,30 +56,34 @@ def find_tracker_urls(dir): #finds third party tracker urls
   entries = os.listdir(dir)
   wifi_dict = {}
   count = 0
-  print 1
   for entry in entries:
-    # count+=1
+    count+=1
     # if count == 10:
     #   break
-    requested_files = load_scripts_from_json(dir+entry)
-    entry = entry.replace(".json","")
-    print entry
-    wifi_dict[entry] = {}
-    # print wifi_dict
-    wifi_dict[entry]["first_party"] = []
-    wifi_dict[entry]["third_party"] = []
-    webpage_domain = tldextract.extract(entry).domain
-    for i in requested_files:
-      url_request_domain = tldextract.extract(i["url"]).domain
-      requested_file_type = mime_type_to_easylist_type(i["type"])
-      if webpage_domain in url_request_domain:
-        options = {'third_party':'False',requested_file_type:'True'}
-        if rules.should_block(i["url"],options) == True:
-          wifi_dict[entry]["first_party"].append(i["url"])
-      else:
-        options = {'third_party':'True',requested_file_type:'True'}
-        if rules.should_block(i["url"],options) == True:
-          wifi_dict[entry]["third_party"].append(i["url"])
+    try:
+      requested_files = load_scripts_from_json(dir+entry)
+      entry = entry.replace(".json","")
+      wifi_dict[entry] = {}
+      # print wifi_dict
+      wifi_dict[entry]["first_party"] = []
+      wifi_dict[entry]["third_party"] = []
+      webpage_domain = tldextract.extract(entry).domain
+      for i in requested_files:
+        url_request_domain = tldextract.extract(i["url"]).domain
+        requested_file_type = mime_type_to_easylist_type(i["type"])
+        if webpage_domain in url_request_domain:
+          options = {'third_party':'False',requested_file_type:'True'}
+          if rules.should_block(i["url"],options) == True:
+            wifi_dict[entry]["first_party"].append(i["url"])
+        else:
+          options = {'third_party':'True',requested_file_type:'True'}
+          if rules.should_block(i["url"],options) == True:
+            wifi_dict[entry]["third_party"].append(i["url"])
+      print(entry,count)
+    except:
+      print("error while processing",entry,count)
+      continue
+      
 
   # print pp.pprint(wifi_dict)
   return wifi_dict
@@ -95,12 +99,13 @@ def get_numbers(url_dict):
 
 
 raw_rules = load_rules(filename)
-filename = "easy_privacy.txt"
+# filename = "easy_privacy.txt"
 
 #combine the two rules
-raw_rules_two = load_rules(filename)
-combined_rules = raw_rules+raw_rules_two
-rules = AdblockRules(combined_rules)
+# raw_rules_two = load_rules(filename)
+# combined_rules = raw_rules+raw_rules_two
+
+rules = AdblockRules(raw_rules)
 
 # rules = AdblockRules(raw_rules)
 
@@ -108,11 +113,11 @@ rules = AdblockRules(combined_rules)
 
 
 
-dir = "./../tracking_data/nexus 5 WIFI/json/"
+dir = "./../data/second_iteration/3/WiFi_3_json/"
 total_trackers = find_tracker_urls(dir) #stores urls of all detected trackers
 tracker_numbers = get_numbers(total_trackers) #stores the number of trackers detected per website
 # print pp.pprint(num_dict)
-if 'WIFI' in dir:
+if 'WiFi' in dir:
   output_total_file_name = "total_trackers_WIFI.json"
   output_number_file_name = "number_trackers_WIFI.json"
 else:
