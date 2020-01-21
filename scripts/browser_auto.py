@@ -14,7 +14,7 @@ import traceback
 scorlling = True
 # grab the sites to visit (rank, domain) format
 filename = 'top-1m.csv'
-dirname = 'site_LTE_4'
+dirname = 'site_WiFi_1'
 CHROME = "com.android.chrome"
 ACTIVITY = "/com.google.android.apps.chrome.Main"
 END = 1000
@@ -63,9 +63,9 @@ def cross_check_list(url_list):
 
 
 def run_automation(url_list):
-
+  count = 0    
   for url in url_list:
-
+    count+=1
     ## clear all storage for browser
     r = subprocess.Popen("adb shell pm clear "+ CHROME, shell=True)
     r.wait()
@@ -119,7 +119,7 @@ def run_automation(url_list):
     py.click(1249,734) # press inspect button
 
   
-    print ('crawling: ',url)
+    print ('crawling: ',url,count)
 
     '''
     # py.click(706,107) #clear the log
